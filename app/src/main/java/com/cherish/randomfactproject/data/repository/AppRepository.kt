@@ -6,7 +6,9 @@ import com.cherish.randomfactproject.data.model.StoreRequest
 import com.cherish.randomfactproject.data.model.StoreResponse
 import com.cherish.randomfactproject.data.remote.ApiService
 import com.cherish.randomfactproject.data.remote.ResponseManager
+import com.cherish.randomfactproject.utils.IODispatcher
 import dagger.Component
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
@@ -14,13 +16,13 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AppRepository @Inject constructor(private val apiService: ApiService, private val storeDao: StoreDao) {
+class AppRepository @Inject constructor(private val apiService: ApiService, private val storeDao: StoreDao, @IODispatcher private val IODispatcher : CoroutineDispatcher) {
     fun getAllStoreItem() = flow{
         val response = apiService.getAllStoreItem()
         emit(ResponseManager.Success(response))
         insertItemToDb(response)
         emit(ResponseManager.Loading(false))
-    }.flowOn(Dispatchers.IO)
+    }.flowOn(IODispatcher)
         .catch { emit(ResponseManager.Failure(it.message, it)) }
         .onStart { emit(ResponseManager.Loading(true)) }
         .onCompletion { emit(ResponseManager.Loading(false)) }

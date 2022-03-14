@@ -15,6 +15,7 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import org.junit.Before
 import org.junit.Test
@@ -30,11 +31,13 @@ class AppRepositoryTest {
 
     private val storeDao = mock<StoreDao>()
 
+    private val dispatcher = TestCoroutineDispatcher()
+
     val testDispatcher = TestCoroutineScheduler()
 
     @Before
     fun setUp(){
-        repository = AppRepository(apiService, storeDao)
+        repository = AppRepository(apiService, storeDao, dispatcher)
     }
 
     @Test

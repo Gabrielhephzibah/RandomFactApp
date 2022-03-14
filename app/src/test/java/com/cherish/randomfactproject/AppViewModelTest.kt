@@ -16,6 +16,7 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
@@ -37,6 +38,8 @@ class AppViewModelTest {
     @get:Rule
     var rule  = InstantTaskExecutorRule()
 
+    private val dispatcher = TestCoroutineDispatcher()
+
 
     @get:Rule
     var mainCoroutineRule = MainCoroutineScopeRule()
@@ -49,7 +52,7 @@ class AppViewModelTest {
 
     @Before
    fun setUp(){
-       repository = AppRepository(apiService, storeDao)
+       repository = AppRepository(apiService, storeDao, dispatcher)
        viewModel = HomeViewModel(repository)
    }
 

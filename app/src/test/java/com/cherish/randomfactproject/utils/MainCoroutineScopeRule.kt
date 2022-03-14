@@ -12,11 +12,14 @@ import org.junit.runner.Description
 import kotlin.coroutines.ContinuationInterceptor
 
 @ExperimentalCoroutinesApi
-class MainCoroutineScopeRule : TestWatcher(), TestCoroutineScope by TestCoroutineScope() {
+class MainCoroutineScopeRule(
+    val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+) : TestWatcher(),
+    TestCoroutineScope by TestCoroutineScope(testDispatcher) {
 
     override fun starting(description: Description?) {
         super.starting(description)
-        Dispatchers.setMain(this.coroutineContext[ContinuationInterceptor] as CoroutineDispatcher)
+        Dispatchers.setMain(testDispatcher)
     }
 
     override fun finished(description: Description?) {
@@ -24,3 +27,15 @@ class MainCoroutineScopeRule : TestWatcher(), TestCoroutineScope by TestCoroutin
         Dispatchers.resetMain()
     }
 }
+//class MainCoroutineScopeRule : TestWatcher(), TestCoroutineScope by TestCoroutineScope() {
+//
+//    override fun starting(description: Description?) {
+//        super.starting(description)
+//        Dispatchers.setMain(this.coroutineContext[ContinuationInterceptor] as CoroutineDispatcher)
+//    }
+//
+//    override fun finished(description: Description?) {
+//        super.finished(description)
+//        Dispatchers.resetMain()
+//    }
+//}

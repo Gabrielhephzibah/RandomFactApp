@@ -7,11 +7,14 @@ import com.cherish.randomfactproject.BuildConfig
 import com.cherish.randomfactproject.data.local.StoreDao
 import com.cherish.randomfactproject.data.local.StoreDatabase
 import com.cherish.randomfactproject.data.remote.ApiService
+import com.cherish.randomfactproject.utils.IODispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -61,9 +64,20 @@ object AppModule {
         return  Room.databaseBuilder(
             context,
             StoreDatabase::class.java,
-            "storedatabase"
+            "nnnn"
         ).fallbackToDestructiveMigration()
             .build()
+
+
+
+
+
+//        return  Room.databaseBuilder(
+//            context,
+//            StoreDatabase::class.java,
+//            "storedatabase"
+//        ).fallbackToDestructiveMigration()
+//            .build()
 
 
     }
@@ -71,6 +85,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideStoreDao(storeDatabase: StoreDatabase) : StoreDao = storeDatabase.storeDao()
+
+    @IODispatcher
+    @Provides
+    fun provideCoroutine(): CoroutineDispatcher = Dispatchers.IO
 
 
 

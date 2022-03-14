@@ -67,7 +67,9 @@ class HomeFragment : Fragment() {
         }
 
     }
-
+/** This method get all item from store
+ *
+ * **/
 
     private fun getAllStore() {
         lifecycleScope.launch {
