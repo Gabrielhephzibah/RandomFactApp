@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.cherish.randomfactproject.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_storeDetails"
+            app:destination="@id/storeDetails" />
+        <action
+            android:id="@+id/action_homeFragment_to_addToStore"
+            app:destination="@id/addToStore" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/storeDetails"
+        android:name="com.cherish.randomfactproject.ui.home.StoreDetails"
+        android:label="fragment_store_details"
+        tools:layout="@layout/fragment_store_details" >
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="category"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument android:name="price"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument android:name="url"
+            app:argType="string"
+            app:nullable="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addToStore"
+        android:name="com.cherish.randomfactproject.ui.home.AddToStore"
+        android:label="fragment_add_to_store"
+        tools:layout="@layout/fragment_add_to_store" />
+
+</navigation>
