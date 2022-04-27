@@ -1,6 +1,7 @@
 package com.cherish.randomfactproject.ui.home
 
 import android.os.Bundle
+import android.provider.Settings.Global.putInt
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,10 @@ import com.cherish.randomfactproject.data.remote.ResponseManager
 
 import com.cherish.randomfactproject.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -39,14 +42,23 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mnn()
+        val x = null
+        val l = listOf(x)
+        print(l)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
 
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mnn()
+        val x = null
+        val l = listOf(x)
+        print(l)
         homeAdapter = HomeAdapter {
             val action = HomeFragmentDirections.actionHomeFragmentToStoreDetails(
                 it.id.toString(),
@@ -70,6 +82,8 @@ class HomeFragment : Fragment() {
 /** This method get all item from store
  *
  * **/
+
+
 
     private fun getAllStore() {
         lifecycleScope.launch {
@@ -150,6 +164,14 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun mnn() = runBlocking {
+        launch {
+            delay(1L)
+            println("B")
+        }
+        println("A")
     }
 
 }

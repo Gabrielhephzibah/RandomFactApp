@@ -40,7 +40,33 @@ class AppRepository @Inject constructor(private val apiService: ApiService, priv
        .onStart { emit(ResponseManager.Loading(true)) }
        .onCompletion { emit(ResponseManager.Loading(false)) }
 
-
+//    fun getRepository(repositoryName: String) = flow{
+//        val response =  apiService.getRepository(repositoryName)
+//        emit(ResponseManager.Success(response))
+//        emit(ResponseManager.Loading())
+//    }.flowOn(Dispatchers.IO)
+//        .catch {
+//            emit(ResponseManager.Failure(it)) }
+//        .onStart {
+//            emit(ResponseManager.Loading())
+//        }
+//        .onCompletion {
+//            emit(ResponseManager.Loading())
+//        }
+//
+//    fun getRepositoryCommits(repositoryName: String) = flow{
+//        val response =  apiService.getRepositoryCommits(repositoryName, AppConstant.QUERY_PARAMS)
+//        emit(ResponseManager.Success(response))
+//        emit(ResponseManager.Loading(false))
+//    }.flowOn(Dispatchers.IO)
+//        .catch {
+//            emit(ResponseManager.Failure(it)) }
+//        .onStart {
+//            emit(ResponseManager.Loading(true))
+//        }
+//        .onCompletion {
+//            emit(ResponseManager.Loading(false))
+//        }
 
 
 }

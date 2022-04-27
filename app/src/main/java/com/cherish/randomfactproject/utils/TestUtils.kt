@@ -13,6 +13,7 @@ object TestUtils {
         2.0,
         Rating(2,3.8),
         "test",
-    )
+    ),
+
     )
 }

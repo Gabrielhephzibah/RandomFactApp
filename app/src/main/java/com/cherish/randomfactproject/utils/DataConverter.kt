@@ -21,7 +21,14 @@ class DataConverter {
         val gson = Gson()
         val token = object :TypeToken<Rating>() {}.type
         return gson.fromJson(value, token)
+
     }
+
+//    fun printString(lsit: List<String>){
+//        lsit.groupBy {  }
+//            .mapValues { it.value.s }
+//
+//    }
 
 
 }
